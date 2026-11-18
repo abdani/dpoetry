@@ -45,7 +45,7 @@ html{min-height:100%;scroll-behavior:smooth;scrollbar-gutter:stable;background:
 body{margin:0;min-height:100vh;color:var(--text);font-family:var(--sans);transition:color .5s}
 button{font:inherit;color:inherit}
 button:focus-visible{outline:2px solid var(--accent);outline-offset:4px}
-.app{--gutter:44px;--nav-w:270px;--rail-w:58px;--nav-gap:clamp(40px,6.5vw,100px);max-width:1440px;margin:auto;padding:28px var(--gutter) 34px;min-height:100vh;display:flex;flex-direction:column}
+.app{--gutter:44px;--nav-w:270px;--rail-w:58px;--node:21px;--pad-r:20px;--pad-l:calc(var(--rail-w) / 2 - var(--node) / 2);--nav-gap:clamp(40px,6.5vw,100px);max-width:1440px;margin:auto;padding:28px var(--gutter) 34px;min-height:100vh;display:flex;flex-direction:column}
 .topbar{display:flex;align-items:center;justify-content:space-between;padding:3px 0 26px;border-bottom:1px solid var(--line)}
 .brand{display:flex;align-items:center;gap:12px;text-decoration:none;color:var(--text)}
 .brand-mark{width:34px;height:34px;border:1px solid var(--line);border-radius:50%;display:grid;place-items:center;color:var(--accent);font-family:var(--display);font-size:22px}
@@ -64,33 +64,38 @@ button:focus-visible{outline:2px solid var(--accent);outline-offset:4px}
 .theme-option[aria-pressed="true"]{background:color-mix(in srgb,var(--accent) 16%,transparent);font-weight:600}
 .theme-option .swatch{width:20px;height:20px}
 /* Layout reserves room for the floating navbar, so it never covers the poem */
-.layout{display:flex;flex:1;padding:55px 0 40px calc(var(--nav-w) + var(--nav-gap));transition:padding-left .55s cubic-bezier(.2,.7,.2,1)}
+/* no transition here: animating padding re-lays out the whole reader every frame. setNav() slides the reader with a transform (FLIP) */
+.layout{display:flex;flex:1;padding:55px 0 40px calc(var(--nav-w) + var(--nav-gap))}
 .nav-collapsed .layout{padding-left:calc(var(--rail-w) + var(--nav-gap))}
 /* Floating navbar: fixed, borderless, defined only by a soft gradient + gradient shadow */
-.timeline{position:fixed;z-index:20;top:50%;left:max(var(--gutter),calc(50vw - 720px + var(--gutter)));transform:translateY(-50%);width:var(--nav-w);max-height:calc(100vh - 150px);max-height:calc(100dvh - 150px);display:flex;flex-direction:column;overflow:hidden;padding:16px 20px 22px;border-radius:24px;background:var(--nav-bg);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);box-shadow:var(--nav-shadow);transition:width .55s cubic-bezier(.2,.7,.2,1),padding .55s cubic-bezier(.2,.7,.2,1),background .5s,box-shadow .5s}
+.timeline{position:fixed;z-index:20;top:50%;left:max(var(--gutter),calc(50vw - 720px + var(--gutter)));transform:translateY(-50%);width:var(--nav-w);max-height:calc(100vh - 150px);max-height:calc(100dvh - 150px);display:flex;flex-direction:column;overflow:hidden;contain:layout paint;padding:16px var(--pad-r) 22px var(--pad-l);border-radius:24px;background:var(--nav-bg);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);box-shadow:var(--nav-shadow);transition:width .55s cubic-bezier(.2,.7,.2,1),background .5s,box-shadow .5s}
+/* Smooth toggle: content keeps a fixed width and fixed positions in both states (nodes sit on the rail's centre line),
+   so only the box width animates — no text re-wrapping, no jumping nodes; collapsed just clips + fades the text */
 .timeline>*{flex-shrink:0}
-.nav-toggle{display:grid;place-items:center;width:30px;height:30px;margin:0 0 14px auto;padding:0;border:0;border-radius:50%;background:var(--panel);color:var(--muted);font-size:17px;line-height:1;cursor:pointer;transition:background .25s,color .25s}
+.timeline>:not(.nav-toggle){width:calc(var(--nav-w) - var(--pad-l) - var(--pad-r))}
+.nav-toggle{display:grid;place-items:center;width:30px;height:30px;margin:0 0 14px calc(var(--rail-w) / 2 - 15px - var(--pad-l));padding:0;border:0;border-radius:50%;background:var(--panel);color:var(--muted);font-size:17px;line-height:1;cursor:pointer;transition:background .25s,color .25s}
 .nav-toggle:hover{background:var(--panel-strong);color:var(--text)}
 .nav-toggle svg{display:block;transition:transform .45s}
-.nav-collapsed .nav-toggle{margin:0 auto 10px}
 .nav-collapsed .nav-toggle svg{transform:rotate(180deg)}
-.nav-collapsed .timeline{width:var(--rail-w);padding:14px 0 16px}
-.nav-collapsed :is(.timeline .eyebrow,.timeline-heading,.timeline-intro,.timeline-note,.poem-text){display:none}
-.nav-collapsed .poem-list{--rail-x:calc(50% - .5px)}
-.nav-collapsed .poem-link{grid-template-columns:auto;justify-content:center;padding:9px 0;border-radius:12px}
-.nav-collapsed .poem-link:hover,.nav-collapsed .poem-link[aria-current="true"]{padding-left:0;background:transparent}
-.timeline.reveal :is(.eyebrow,.timeline-heading,.timeline-intro,.timeline-note,.poem-text){animation:navText .45s .3s cubic-bezier(.2,.7,.2,1) both}
-@keyframes navText{from{opacity:0;transform:translateX(-8px)}to{opacity:1;transform:none}}
+.nav-collapsed .timeline{width:var(--rail-w)}
+/* text is revealed/covered by the box width itself (drawer); it is only hidden once, at the end of a collapse —
+   no per-item fades, so 49 titles don't cost style work every frame */
+.nav-collapsed .timeline :is(.timeline-note,.poem-text){visibility:hidden;transition:visibility 0s .55s}
+/* heading block folds its height smoothly (grid 1fr → 0fr) instead of popping in/out */
+.nav-head{display:grid;grid-template-rows:1fr;transition:grid-template-rows .55s cubic-bezier(.2,.7,.2,1)}
+.nav-head>div{min-height:0;overflow:hidden}
+.nav-collapsed .nav-head{grid-template-rows:0fr;visibility:hidden;transition:grid-template-rows .55s cubic-bezier(.2,.7,.2,1),visibility 0s .55s}
+.nav-collapsed .poem-link:hover,.nav-collapsed .poem-link[aria-current="true"]{background:transparent}
 .eyebrow{font-size:10px;letter-spacing:.22em;text-transform:uppercase;color:var(--muted);font-weight:650}
 .timeline-heading{font-family:var(--display);font-size:33px;font-weight:500;letter-spacing:-.01em;line-height:1.05;margin:12px 0 9px}
 .timeline-intro{font-size:12px;line-height:1.8;color:var(--muted);max-width:220px;margin:0 0 36px}
 /* Only the list scrolls (hundreds of poems); edges fade out; the rail line is a local background so it spans all items */
 .poem-list{--rail-x:10px;flex:1;min-height:0;display:flex;flex-direction:column;gap:7px;padding:4px 0 26px;overflow:hidden auto;scrollbar-width:none;overscroll-behavior:contain;background:linear-gradient(var(--line),var(--line)) var(--rail-x) 0/1px 100% no-repeat local;-webkit-mask-image:linear-gradient(transparent,#000 10px,#000 calc(100% - 30px),transparent);mask-image:linear-gradient(transparent,#000 10px,#000 calc(100% - 30px),transparent)}
 .poem-list>*{flex-shrink:0}
-.poem-link{position:relative;display:grid;grid-template-columns:21px 1fr;gap:16px;text-align:left;align-items:start;padding:13px 13px 13px 0;border:0;background:transparent;cursor:pointer;border-radius:0 12px 12px 0;transition:background .3s,padding .3s}
-.poem-link:hover{background:var(--panel);padding-left:8px}
-.poem-link[aria-current="true"]{background:linear-gradient(90deg,color-mix(in srgb,var(--accent) 13%,transparent),transparent);padding-left:8px}
-.node{z-index:1;width:21px;height:21px;border-radius:50%;display:grid;place-items:center;background:var(--bg);border:1px solid var(--line);transition:border .35s,box-shadow .35s}
+.poem-link{position:relative;display:grid;grid-template-columns:var(--node) 1fr;gap:16px;text-align:left;align-items:start;padding:13px 13px 13px 0;border:0;background:transparent;cursor:pointer;border-radius:0 12px 12px 0;transition:background .3s}
+.poem-link:hover{background:var(--panel)}
+.poem-link[aria-current="true"]{background:linear-gradient(90deg,color-mix(in srgb,var(--accent) 13%,transparent),transparent)}
+.node{z-index:1;width:var(--node);height:var(--node);border-radius:50%;display:grid;place-items:center;background:var(--bg);border:1px solid var(--line);transition:border .35s,box-shadow .35s}
 .node:after{content:"";width:5px;height:5px;border-radius:50%;background:var(--muted);transition:background .35s,transform .35s}
 .poem-link[aria-current="true"] .node{border-color:var(--accent);box-shadow:0 0 0 5px color-mix(in srgb,var(--accent) 10%,transparent)}
 .poem-link[aria-current="true"] .node:after{background:var(--accent);transform:scale(1.25)}
@@ -174,9 +179,9 @@ mark{background:color-mix(in srgb,var(--accent) 32%,transparent);color:inherit;b
 @keyframes cardIn{from{opacity:0;transform:translateY(14px) scale(.99);filter:blur(5px)}to{opacity:1;transform:translateY(0) scale(1);filter:blur(0)}}
 .poem-card.enter{animation:cardIn .7s cubic-bezier(.2,.7,.2,1) both}
 @media(prefers-reduced-motion:reduce){*,*:before,*:after{scroll-behavior:auto!important;animation:none!important;transition:none!important}}
-@media(max-width:850px){.app{--gutter:25px;--nav-w:205px;--nav-gap:34px;padding:22px var(--gutter)}.timeline{padding:14px 15px 18px}.timeline-heading{font-size:26px}.timeline-intro{font-size:11px;margin-bottom:26px}.poem-title{font-size:15px}.timeline-note{display:none}.poem-card{min-height:548px;padding:38px 30px 23px}}
+@media(max-width:850px){.app{--gutter:25px;--nav-w:205px;--nav-gap:34px;--pad-r:15px;padding:22px var(--gutter)}.timeline{padding:14px var(--pad-r) 18px var(--pad-l)}.timeline-heading{font-size:26px}.timeline-intro{font-size:11px;margin-bottom:26px}.poem-title{font-size:15px}.timeline-note{display:none}.poem-card{min-height:548px;padding:38px 30px 23px}}
 /* Phone: vertical rail stays on the left (collapsed by default); expanded it floats over the poem */
-@media(max-width:650px){.app{--gutter:14px;--nav-w:224px;--rail-w:50px;--nav-gap:12px;padding:15px var(--gutter) 20px}.topbar{padding-bottom:15px}.top-meta .edition{display:none}.layout,.nav-collapsed .layout{padding:22px 0 24px calc(var(--rail-w) + var(--nav-gap))}.timeline{padding:12px 12px 12px;border-radius:18px}.app:not(.nav-collapsed) .timeline{background:color-mix(in srgb,var(--bg) 84%,transparent)}.timeline .eyebrow,.timeline-heading,.timeline-intro{display:none}.poem-list{gap:4px;--rail-x:8px}.poem-link{grid-template-columns:17px 1fr;gap:9px;padding:9px 6px 9px 0;border-radius:0 10px 10px 0}.poem-link:hover,.poem-link[aria-current="true"]{padding-left:3px}.node{width:17px;height:17px}.node:after{width:4px;height:4px}.poem-title{font-size:14px;margin:0 0 3px}.poem-date{font-size:9px;letter-spacing:.08em}.reader-top{margin-bottom:10px}.collection-label,.reader-count{font-size:9px;letter-spacing:.1em}.poem-card{min-height:548px;border-radius:16px;padding:24px 16px 16px}.card-kicker{font-size:9px;letter-spacing:.14em;margin-bottom:14px}.poem-heading{font-size:clamp(33px,9.6vw,48px)}.poem-heading.long{font-size:clamp(26px,7.4vw,35px)}.poem-subtitle{font-size:13px;margin:10px 0 20px}.poem-body{font-size:15px;line-height:1.85;min-height:200px}.poem-footer{padding-top:18px}.nav-button{width:38px;height:38px}.page-nav{gap:12px}.jump-word{display:none}.jump-button{letter-spacing:.08em}.bottomline{font-size:9px}.bottomline span:last-child{font-size:12px}}
+@media(max-width:650px){.app{--gutter:14px;--nav-w:224px;--rail-w:50px;--node:17px;--pad-r:12px;--nav-gap:12px;padding:15px var(--gutter) 20px}.topbar{padding-bottom:15px}.top-meta .edition{display:none}.layout,.nav-collapsed .layout{padding:22px 0 24px calc(var(--rail-w) + var(--nav-gap))}.timeline{padding:12px var(--pad-r) 12px var(--pad-l);border-radius:18px}.app:not(.nav-collapsed) .timeline{background:color-mix(in srgb,var(--bg) 84%,transparent)}.nav-head{display:none}.poem-list{gap:4px;--rail-x:8px}.poem-link{gap:9px;padding:9px 6px 9px 0;border-radius:0 10px 10px 0}.node:after{width:4px;height:4px}.poem-title{font-size:14px;margin:0 0 3px}.poem-date{font-size:9px;letter-spacing:.08em}.reader-top{margin-bottom:10px}.collection-label,.reader-count{font-size:9px;letter-spacing:.1em}.poem-card{min-height:548px;border-radius:16px;padding:24px 16px 16px}.card-kicker{font-size:9px;letter-spacing:.14em;margin-bottom:14px}.poem-heading{font-size:clamp(33px,9.6vw,48px)}.poem-heading.long{font-size:clamp(26px,7.4vw,35px)}.poem-subtitle{font-size:13px;margin:10px 0 20px}.poem-body{font-size:15px;line-height:1.85;min-height:200px}.poem-footer{padding-top:18px}.nav-button{width:38px;height:38px}.page-nav{gap:12px}.jump-word{display:none}.jump-button{letter-spacing:.08em}.bottomline{font-size:9px}.bottomline span:last-child{font-size:12px}}
 @media(max-width:380px){.app{--nav-gap:10px}.poem-card{padding:20px 13px 14px}.poem-body{font-size:14.5px}.collection-label:before{display:none}.theme-toggle{padding:8px 10px}}
 </style>
 </head>
@@ -195,9 +200,11 @@ mark{background:color-mix(in srgb,var(--accent) 32%,transparent);color:inherit;b
   <main class="layout">
     <aside class="timeline" id="timeline" aria-label="Daftar puisi">
       <button class="nav-toggle" id="navToggle" type="button" aria-controls="poemList" aria-expanded="true" aria-label="Ciutkan navigasi" title="Ciutkan / buka navigasi"><svg aria-hidden="true" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M15 5l-7 7 7 7"/></svg></button>
+      <div class="nav-head"><div>
       <div class="eyebrow">The collection · 2026</div>
       <h1 class="timeline-heading">Words that<br>stay with us.</h1>
       <p class="timeline-intro">Beberapa hal terlalu berarti untuk dibiarkan hilang begitu saja.</p>
+      </div></div>
       <nav class="poem-list" id="poemList"></nav>
       <p class="timeline-note">“Some feelings find their way home through words.”</p>
     </aside>
@@ -401,11 +408,13 @@ $("nextPage").addEventListener("click",()=>goToPage(1));
 $("backLink").addEventListener("click",()=>{activePage=0;renderPoem(true);window.scrollTo({top:0,behavior:"smooth"})});
 const app=document.querySelector(".app"),phone=matchMedia("(max-width:650px)");
 function setNav(open){
- const wasOpen=!app.classList.contains("nav-collapsed");
+ const reader=document.querySelector(".reader"),x0=reader.getBoundingClientRect().left;
  app.classList.toggle("nav-collapsed",!open);
  $("navToggle").setAttribute("aria-expanded",String(open));
  $("navToggle").setAttribute("aria-label",open?"Ciutkan navigasi":"Buka navigasi");
- if(open&&!wasOpen){const nav=$("timeline");nav.classList.remove("reveal");void nav.offsetWidth;nav.classList.add("reveal")}
+ // desktop: the reader moves with the rail — FLIP it (start where it was, glide to the new spot) on the GPU instead of animating layout
+ const dx=x0-reader.getBoundingClientRect().left;
+ if(dx&&!matchMedia("(prefers-reduced-motion:reduce)").matches)reader.animate([{transform:`translateX(${dx}px)`},{transform:"none"}],{duration:550,easing:"cubic-bezier(.2,.7,.2,1)"});
 }
 $("navToggle").addEventListener("click",()=>setNav(app.classList.contains("nav-collapsed")));
 // On phones the expanded navbar overlays the poem: tap outside or Esc closes it
