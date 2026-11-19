@@ -17,7 +17,7 @@
   --text:#f1eee8; --muted:#999ba5; --soft:#c4c0b9;
   --accent:#c7a8a0; --accent2:#9d8cbd; --shadow:0 24px 80px rgba(0,0,0,.28);
   --nav-bg:linear-gradient(170deg,rgba(255,255,255,.065),rgba(255,255,255,0) 78%);
-  --nav-shadow:0 30px 60px -18px rgba(0,0,0,.75),0 12px 34px -14px color-mix(in srgb,var(--accent2) 30%,transparent);
+  --nav-shadow:0 16px 44px -14px rgba(0,0,0,.72),0 8px 26px -12px color-mix(in srgb,var(--accent2) 30%,transparent);
   --serif:Lora,Georgia,"Times New Roman",serif; /* reading text: elegant, readable */
   --display:"Cormorant Garamond",Georgia,serif; /* headings: romantic display */
   --sans:Inter,ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif;
@@ -28,7 +28,7 @@
   color-scheme:light; --panel:rgba(255,255,255,.48); --panel-strong:rgba(255,255,255,.72);
   --line:color-mix(in srgb,var(--text) 13%,transparent); --shadow:0 24px 80px color-mix(in srgb,var(--text) 13%,transparent);
   --nav-bg:linear-gradient(170deg,rgba(255,255,255,.6),rgba(255,255,255,.12) 78%);
-  --nav-shadow:0 30px 60px -20px color-mix(in srgb,var(--text) 32%,transparent),0 12px 34px -16px color-mix(in srgb,var(--accent2) 22%,transparent);
+  --nav-shadow:0 16px 44px -16px color-mix(in srgb,var(--text) 30%,transparent),0 8px 26px -12px color-mix(in srgb,var(--accent2) 22%,transparent);
 }
 :root[data-theme="light"]{--bg:#ecebe8;--text:#282725;--soft:#57524e;--muted:#6b6763;--accent:#7c5a51;--accent2:#77658e}
 :root[data-theme="rose"]{--bg:#e9d4d6;--text:#3a2629;--soft:#563c41;--muted:#71515a;--accent:#8d3a4e;--accent2:#7a5a96}
@@ -101,7 +101,7 @@ button:focus-visible{outline:2px solid var(--accent);outline-offset:4px}
 /* Only the list scrolls (hundreds of poems); edges fade out; the rail line is a local background so it spans all items */
 .poem-list{--rail-x:10px;flex:1;min-height:0;display:flex;flex-direction:column;gap:7px;padding:4px 0 26px;overflow:hidden auto;scrollbar-width:none;overscroll-behavior:contain;background:linear-gradient(var(--line),var(--line)) var(--rail-x) 0/1px 100% no-repeat local;-webkit-mask-image:linear-gradient(transparent,#000 10px,#000 calc(100% - 30px),transparent);mask-image:linear-gradient(transparent,#000 10px,#000 calc(100% - 30px),transparent)}
 .poem-list>*{flex-shrink:0}
-.poem-link{position:relative;display:grid;grid-template-columns:var(--node) 1fr;gap:16px;text-align:left;align-items:start;padding:13px 13px 13px 0;border:0;background:transparent;cursor:pointer;border-radius:0 12px 12px 0}
+.poem-link{position:relative;display:grid;grid-template-columns:var(--node) 1fr;gap:16px;text-align:left;align-items:start;padding:10px 13px 10px 0;border:0;background:transparent;cursor:pointer;border-radius:0 12px 12px 0}
 /* rail items/nodes switch state instantly: their paint transitions ran on the main thread and stalled the card animation on Android */
 .poem-link:hover{background:var(--panel)}
 .poem-link[aria-current="true"]{background:linear-gradient(90deg,color-mix(in srgb,var(--accent) 13%,transparent),transparent)}
@@ -112,7 +112,8 @@ button:focus-visible{outline:2px solid var(--accent);outline-offset:4px}
 .poem-title{font-family:var(--serif);font-size:17px;line-height:1.25;display:block;margin:0 0 5px}
 .poem-date{font-size:10px;letter-spacing:.1em;color:var(--muted);text-transform:uppercase}
 .timeline-note{margin:34px 0 0 37px;padding-top:17px;border-top:1px solid var(--line);max-width:170px;color:var(--muted);font:italic 500 15px/1.6 var(--display)}
-.reader{flex:1;min-width:0;max-width:880px;margin:0 auto;display:flex;flex-direction:column;justify-content:center}
+/* right-aligned: the card's right edge lines up with the header (theme button) instead of floating in the middle */
+.reader{flex:1;min-width:0;max-width:880px;margin:0 0 0 auto;display:flex;flex-direction:column;justify-content:flex-start} /* top-aligned: a taller poem must not shift the column (the rail is aligned to it) */
 .reader-top{position:relative;z-index:5;display:flex;justify-content:space-between;align-items:center;gap:14px;margin-bottom:15px}
 .reader-tools{flex:1;min-width:0;display:flex;align-items:center;justify-content:flex-end;gap:14px}
 /* Search: pill input next to the counter; results drop down over the card (max 4, 2-line snippet) */
@@ -120,7 +121,7 @@ button:focus-visible{outline:2px solid var(--accent);outline-offset:4px}
 .search:focus-within{border-color:color-mix(in srgb,var(--accent) 60%,var(--line));background:var(--panel-strong)}
 .search svg{flex:none}
 .search input{flex:1;min-width:0;height:100%;border:0;background:none;outline:none;color:var(--text);font:13px var(--sans);letter-spacing:.02em}
-.search input::placeholder{color:var(--muted)}
+.search input::placeholder{color:var(--muted);font-size:13px} /* typed text stays 16px on phones (no iOS zoom); the hint matches the labels */
 .search-results{position:absolute;top:calc(100% + 8px);right:0;width:min(400px,100%);max-height:min(620px,calc(100dvh - 230px));overflow-y:auto;overscroll-behavior:contain;scrollbar-width:thin;padding:6px;border:1px solid var(--line);border-radius:16px;background:color-mix(in srgb,var(--bg) 92%,transparent);backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px);box-shadow:var(--nav-shadow)}
 .result{display:block;width:100%;padding:10px 12px;border:0;border-radius:11px;background:none;text-align:left;cursor:pointer}
 .result:hover,.result:focus-visible{background:var(--panel-strong)}
@@ -146,7 +147,8 @@ mark{background:color-mix(in srgb,var(--accent) 32%,transparent);color:inherit;b
 .card-kicker{font-size:10px;letter-spacing:.22em;text-transform:uppercase;color:var(--accent);margin-bottom:20px}
 .poem-heading{font:500 clamp(46px,6.4vw,82px)/1 var(--display);letter-spacing:-.02em;margin:0;max-width:760px}
 .poem-subtitle{font:italic 16px/1.6 var(--serif);color:var(--muted);margin:16px 0 35px}
-.poem-body{font:clamp(16px,1.35vw,19px)/1.9 var(--serif);color:var(--soft);white-space:pre-line;max-width:590px;min-height:190px;animation:pageIn .65s cubic-bezier(.2,.7,.2,1) both}
+.poem-body{font:clamp(16px,1.35vw,19px)/1.9 var(--serif);color:var(--soft);white-space:pre-line;max-width:590px;min-height:190px;margin-block:auto;animation:pageIn .65s cubic-bezier(.2,.7,.2,1) both}
+/* margin-block:auto = a short poem sits centred in the card's free space instead of leaving one big gap above the footer */
 /* Both pages share one grid cell: card height = taller page, so nav buttons never jump when paging */
 .poem-body{display:grid}
 .poem-page{grid-area:1/1}
@@ -160,14 +162,14 @@ mark{background:color-mix(in srgb,var(--accent) 32%,transparent);color:inherit;b
 .poem-heading.starry::after{margin-left:.2em}
 /* Page turn: to page 2 the text enters from the right (pivot on the right edge), back to page 1 from the left */
 /* no filter:blur() in any keyframes: re-rasterising a blur every frame dropped ~half the frames on Android */
-@keyframes turnFromRight{from{opacity:0;transform:perspective(900px) translateX(34px) rotateY(-9deg)}}
-@keyframes turnFromLeft{from{opacity:0;transform:perspective(900px) translateX(-34px) rotateY(9deg)}}
+@keyframes turnFromRight{from{opacity:0;transform:perspective(900px) translateX(14px) rotateY(-5deg)}}
+@keyframes turnFromLeft{from{opacity:0;transform:perspective(900px) translateX(-14px) rotateY(5deg)}}
 .poem-body[data-dir="next"] .poem-page{transform-origin:right center;animation:turnFromRight .6s cubic-bezier(.2,.7,.2,1) both}
 .poem-body[data-dir="prev"] .poem-page{transform-origin:left center;animation:turnFromLeft .6s cubic-bezier(.2,.7,.2,1) both}
 .poem-heading[data-dir="next"]{transform-origin:right center;animation:turnFromRight .6s cubic-bezier(.2,.7,.2,1) both}
 .poem-heading[data-dir="prev"]{transform-origin:left center;animation:turnFromLeft .6s cubic-bezier(.2,.7,.2,1) both}
 /* Footer, one row: [Last Page]  [prev] [dots] [next]  [First Page] */
-.poem-footer{margin-top:auto;padding-top:24px;border-top:1px solid var(--line);display:grid;grid-template-columns:1fr auto 1fr;align-items:center;gap:10px}
+.poem-footer{padding-top:24px;border-top:1px solid var(--line);display:grid;grid-template-columns:1fr auto 1fr;align-items:center;gap:10px}
 .page-nav{display:flex;align-items:center;gap:22px}
 .jump-button{height:42px;padding:0 2px;border:0;background:none;color:var(--muted);font-size:11px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;white-space:nowrap;cursor:pointer;transition:color .25s}
 .jump-button:hover:not(:disabled){color:var(--text)}
@@ -190,9 +192,9 @@ mark{background:color-mix(in srgb,var(--accent) 32%,transparent);color:inherit;b
 @keyframes cardIn{from{opacity:0;transform:translateY(14px) scale(.99)}to{opacity:1;transform:translateY(0) scale(1)}}
 .poem-card.enter{animation:cardIn .7s cubic-bezier(.2,.7,.2,1) both}
 @media(prefers-reduced-motion:reduce){*,*:before,*:after{scroll-behavior:auto!important;animation:none!important;transition:none!important}}
-@media(max-width:850px){.app{--gutter:25px;--nav-w:205px;--rail-scale:.2829;--nav-gap:34px;--pad-r:15px;padding:22px var(--gutter)}.timeline{padding:14px var(--pad-r) 18px var(--pad-l)}.timeline-heading{font-size:26px}.timeline-intro{font-size:11px;margin-bottom:26px}.poem-title{font-size:15px}.timeline-note{display:none}.poem-card{min-height:548px;padding:38px 30px 23px}}
+@media(max-width:850px){.app{--gutter:25px;--nav-w:224px;--rail-scale:.2589;--nav-gap:28px;--pad-r:15px;padding:22px var(--gutter)}.timeline{padding:14px var(--pad-r) 18px var(--pad-l)}.timeline-heading{font-size:26px}.timeline-intro{font-size:11px;margin-bottom:26px}.poem-title{font-size:14px}.poem-link{gap:12px}.timeline-note{display:none}.poem-card{min-height:548px;padding:38px 30px 23px}}
 /* Phone: vertical rail stays on the left (collapsed by default); expanded it floats over the poem */
-@media(max-width:650px){.app{--gutter:14px;--nav-w:224px;--rail-w:50px;--rail-scale:.2232;--nav-r:18px;--node:17px;--pad-r:12px;--nav-gap:12px;padding:15px var(--gutter) 20px}.topbar{padding-bottom:15px}.top-meta .edition{display:none}.layout,.nav-collapsed .layout{padding:22px 0 24px calc(var(--rail-w) + var(--nav-gap))}.timeline{padding:12px var(--pad-r) 12px var(--pad-l)}.app:not(.nav-collapsed) .timeline{background:var(--bg);transition:clip-path .55s cubic-bezier(.2,.7,.2,1),background 0s}.nav-head{display:none}.poem-list{gap:4px;--rail-x:8px}.poem-link{gap:9px;padding:9px 6px 9px 0;border-radius:0 10px 10px 0}.node:after{width:4px;height:4px}.poem-title{font-size:14px;margin:0 0 3px}.poem-date{font-size:9px;letter-spacing:.08em}.reader-top{margin-bottom:10px}.collection-label,.reader-count{font-size:9px;letter-spacing:.1em}.poem-card{min-height:548px;border-radius:16px;padding:24px 16px 16px}.card-kicker{font-size:9px;letter-spacing:.14em;margin-bottom:14px}.poem-heading{font-size:clamp(33px,9.6vw,48px)}.poem-heading.long{font-size:clamp(26px,7.4vw,35px)}.poem-subtitle{font-size:13px;margin:10px 0 20px}.poem-body{font-size:15px;line-height:1.85;min-height:200px}.poem-footer{padding-top:18px}.nav-button{width:38px;height:38px}.page-nav{gap:12px}.jump-word{display:none}.jump-button{letter-spacing:.08em}.bottomline{font-size:9px}.bottomline span:last-child{font-size:12px}}
+@media(max-width:650px){.app{--gutter:14px;--nav-w:224px;--rail-w:50px;--rail-scale:.2232;--nav-r:18px;--node:17px;--pad-r:12px;--nav-gap:12px;padding:15px var(--gutter) 20px}.topbar{padding-bottom:15px}.top-meta .edition{display:none}.layout,.nav-collapsed .layout{padding:22px 0 24px calc(var(--rail-w) + var(--nav-gap))}.timeline{padding:12px var(--pad-r) 12px var(--pad-l)}.app:not(.nav-collapsed) .timeline{background:var(--bg);transition:clip-path .55s cubic-bezier(.2,.7,.2,1),background 0s}.nav-head{display:none}.poem-list{gap:4px;--rail-x:8px}.poem-link{gap:9px;padding:7px 6px 7px 0;border-radius:0 10px 10px 0}.node:after{width:4px;height:4px}.poem-title{font-size:14px;margin:0 0 3px}.poem-date{font-size:9px;letter-spacing:.08em}.reader-top{margin-bottom:10px}.collection-label,.reader-count{font-size:9px;letter-spacing:.1em}.poem-card{min-height:548px;border-radius:16px;padding:24px 16px 16px}.card-kicker{font-size:9px;letter-spacing:.14em;margin-bottom:14px}.poem-heading{font-size:clamp(33px,9.6vw,48px)}.poem-heading.long{font-size:clamp(26px,7.4vw,35px)}.poem-subtitle{font-size:13px;margin:10px 0 20px}.poem-body{font-size:15px;line-height:1.85;min-height:200px}.poem-footer{padding-top:18px}.nav-button{width:38px;height:38px}.page-nav{gap:12px}.jump-word{display:none}.jump-button{letter-spacing:.08em}.bottomline{font-size:9px}.bottomline span:last-child{font-size:12px}}
 @media(max-width:380px){.app{--nav-gap:10px}.brand{gap:9px}.brand-name{letter-spacing:.14em}#themeText{display:none}.poem-card{padding:20px 13px 14px}.poem-body{font-size:14.5px}.collection-label:before{display:none}.theme-toggle{padding:8px 10px}}
 </style>
 </head>
@@ -519,7 +521,20 @@ $("searchInput").addEventListener("keydown",event=>{
 });
 document.addEventListener("click",event=>{if(!event.target.closest(".search"))$("searchResults").hidden=true});
 
+// Align the floating rail with the reader column (instead of the viewport centre):
+// its toggle sits on the "Selected" row's centre line, its bottom is level with the card (min-height), never past the viewport.
+function placeNav(){
+ const wrap=document.querySelector(".nav-wrap"),nav=$("timeline"),card=$("poemCard"),
+  row=document.querySelector(".reader-top").getBoundingClientRect(),c=card.getBoundingClientRect(),gutter=parseFloat(getComputedStyle(app).paddingLeft);
+ const top=Math.round(row.top+scrollY+row.height/2-$("navToggle").offsetHeight/2-parseFloat(getComputedStyle(nav).paddingTop));
+ const bottom=Math.min(c.top+scrollY+parseFloat(getComputedStyle(card).minHeight),innerHeight-gutter);
+ wrap.style.top=top+"px";wrap.style.transform="none";nav.style.maxHeight=Math.max(160,Math.round(bottom-top))+"px";
+}
+
 renderPoem();
+placeNav();
+addEventListener("resize",placeNav);
+document.fonts.ready.then(placeNav);
 </script>
 </body>
 </html>
