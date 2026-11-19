@@ -49,7 +49,8 @@ button:focus-visible{outline:2px solid var(--accent);outline-offset:4px}
 .topbar{display:flex;align-items:center;justify-content:space-between;padding:3px 0 26px;border-bottom:1px solid var(--line)}
 .brand{display:flex;align-items:center;gap:12px;text-decoration:none;color:var(--text)}
 .brand-mark{width:34px;height:34px;border:1px solid var(--line);border-radius:50%;display:grid;place-items:center;color:var(--accent);font-family:var(--display);font-size:22px}
-.brand-name{font-size:12px;letter-spacing:.22em;font-weight:650}
+.brand-name{font-size:12px;letter-spacing:.22em;font-weight:650;white-space:nowrap}
+.brand-tag{font-size:10px;letter-spacing:.08em;font-weight:500;color:var(--muted);margin-right:.2em}
 .top-meta{display:flex;align-items:center;gap:20px;color:var(--muted);font-size:11px;letter-spacing:.12em;text-transform:uppercase}
 .theme-toggle,.icon-button{border:1px solid var(--line);background:var(--panel);border-radius:999px;display:inline-flex;align-items:center;justify-content:center;gap:8px;cursor:pointer;transition:background .25s,border-color .25s,transform .25s}
 .theme-toggle{padding:9px 13px;font-size:11px;letter-spacing:.08em}
@@ -182,14 +183,14 @@ mark{background:color-mix(in srgb,var(--accent) 32%,transparent);color:inherit;b
 @media(max-width:850px){.app{--gutter:25px;--nav-w:205px;--nav-gap:34px;--pad-r:15px;padding:22px var(--gutter)}.timeline{padding:14px var(--pad-r) 18px var(--pad-l)}.timeline-heading{font-size:26px}.timeline-intro{font-size:11px;margin-bottom:26px}.poem-title{font-size:15px}.timeline-note{display:none}.poem-card{min-height:548px;padding:38px 30px 23px}}
 /* Phone: vertical rail stays on the left (collapsed by default); expanded it floats over the poem */
 @media(max-width:650px){.app{--gutter:14px;--nav-w:224px;--rail-w:50px;--node:17px;--pad-r:12px;--nav-gap:12px;padding:15px var(--gutter) 20px}.topbar{padding-bottom:15px}.top-meta .edition{display:none}.layout,.nav-collapsed .layout{padding:22px 0 24px calc(var(--rail-w) + var(--nav-gap))}.timeline{padding:12px var(--pad-r) 12px var(--pad-l);border-radius:18px}.app:not(.nav-collapsed) .timeline{background:color-mix(in srgb,var(--bg) 84%,transparent)}.nav-head{display:none}.poem-list{gap:4px;--rail-x:8px}.poem-link{gap:9px;padding:9px 6px 9px 0;border-radius:0 10px 10px 0}.node:after{width:4px;height:4px}.poem-title{font-size:14px;margin:0 0 3px}.poem-date{font-size:9px;letter-spacing:.08em}.reader-top{margin-bottom:10px}.collection-label,.reader-count{font-size:9px;letter-spacing:.1em}.poem-card{min-height:548px;border-radius:16px;padding:24px 16px 16px}.card-kicker{font-size:9px;letter-spacing:.14em;margin-bottom:14px}.poem-heading{font-size:clamp(33px,9.6vw,48px)}.poem-heading.long{font-size:clamp(26px,7.4vw,35px)}.poem-subtitle{font-size:13px;margin:10px 0 20px}.poem-body{font-size:15px;line-height:1.85;min-height:200px}.poem-footer{padding-top:18px}.nav-button{width:38px;height:38px}.page-nav{gap:12px}.jump-word{display:none}.jump-button{letter-spacing:.08em}.bottomline{font-size:9px}.bottomline span:last-child{font-size:12px}}
-@media(max-width:380px){.app{--nav-gap:10px}.poem-card{padding:20px 13px 14px}.poem-body{font-size:14.5px}.collection-label:before{display:none}.theme-toggle{padding:8px 10px}}
+@media(max-width:380px){.app{--nav-gap:10px}.brand{gap:9px}.brand-name{letter-spacing:.14em}#themeText{display:none}.poem-card{padding:20px 13px 14px}.poem-body{font-size:14.5px}.collection-label:before{display:none}.theme-toggle{padding:8px 10px}}
 </style>
 </head>
 <body>
 <div class="app">
   <header class="topbar">
-    <a class="brand" href="#" aria-label="Afterglow home">
-      <span class="brand-mark">a.</span><span class="brand-name">AFTERGLOW</span>
+    <a class="brand" href="#" aria-label="(Unreleased) DPOETRY home">
+      <span class="brand-mark">D.</span><span class="brand-name"><span class="brand-tag">(Unreleased)</span> DPOETRY</span>
     </a>
     <div class="top-meta"><span class="edition">A SMALL POETRY ARCHIVE</span>
       <button class="theme-toggle" id="themeToggle" type="button" popovertarget="themeMenu" aria-haspopup="true" aria-label="Pilih tema"><span class="swatch" style="--sw-bg:var(--bg);--sw-accent:var(--accent)"></span><span id="themeText">MIDNIGHT</span></button>
