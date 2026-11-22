@@ -27,7 +27,7 @@
 <h3 align="center">✨ Star Vessel ✨</h3>
 
 <p align="center">
-  <i>I hope it finds its way to them, and that one day they read it too.</i>
+  <i>I hope it finds its way to her, and that one day she reads it too.</i>
 </p>
 
 ## Preview
