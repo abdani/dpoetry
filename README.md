@@ -20,7 +20,7 @@
 > **Unreleased.** The poems are still being corrected and revised, so text, titles and translations may change before the first release.
 
 <p align="center">
-  Among these poems, there is one I wrote especially for someone dear to me,<br>
+  Among these poems, there is one I wrote especially for someone I admire and hold dear,<br>
   from the deepest part of my heart:
 </p>
 
