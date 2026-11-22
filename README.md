@@ -19,19 +19,36 @@
 > [!NOTE]
 > **Unreleased.** The poems are still being corrected and revised, so text, titles and translations may change before the first release.
 
-## Poems with Arabic
+## English, Indonesian and a line of Arabic
 
-Many poems close their Indonesian page with a single line of Arabic, followed by its transliteration and meaning.
+Each poem opens with its English page; the Indonesian page follows and often closes with a single line of Arabic, its transliteration and meaning.
 
 <p align="center">
   <img src="docs/images/arabic-desktop.png" alt="Desktop, Midnight theme: the Indonesian page of 'Bulan yang Kupinjam dari Langit', ending with an Arabic line, its transliteration and meaning" width="880">
 </p>
 
-<p align="center">
-  <img src="docs/images/arabic-phone-rose.png" alt="Phone, Rosé theme: 'Kau adalah Tanah Airku' with its Arabic line at the bottom" width="300">
-  &nbsp;&nbsp;
-  <img src="docs/images/arabic-phone-ocean.png" alt="Phone, Ocean theme: 'Jendela yang Selalu Kubiarkan Terbuka' with its Arabic line at the bottom" width="300">
-</p>
+<table align="center">
+  <tr>
+    <td align="center">
+      <img src="docs/images/arabic-phone-rose.png" alt="Phone, Rosé theme: the Indonesian page of 'Kau adalah Tanah Airku' with its Arabic line at the bottom" width="300"><br>
+      <sub><b>Indonesian page</b> · Rosé</sub>
+    </td>
+    <td align="center">
+      <img src="docs/images/arabic-phone-ocean.png" alt="Phone, Ocean theme: the Indonesian page of 'Jendela yang Selalu Kubiarkan Terbuka' with its Arabic line at the bottom" width="300"><br>
+      <sub><b>Indonesian page</b> · Ocean</sub>
+    </td>
+  </tr>
+  <tr>
+    <td align="center">
+      <img src="docs/images/english-phone-lavender.png" alt="Phone, Lavender theme: the English page, 'You Are My Homeland'" width="300"><br>
+      <sub><b>English page</b> · Lavender</sub>
+    </td>
+    <td align="center">
+      <img src="docs/images/english-phone-daylight.png" alt="Phone, Daylight theme: the English page, 'The Window I Always Leave Open'" width="300"><br>
+      <sub><b>English page</b> · Daylight</sub>
+    </td>
+  </tr>
+</table>
 
 ## What's inside
 
