@@ -45,8 +45,8 @@ Each poem opens with its English page; the Indonesian page follows and often clo
 <table align="center">
   <tr>
     <td align="center">
-      <img src="docs/images/arabic-phone-rose.png" alt="Phone, Rosé theme: the Indonesian page of 'Kau adalah Tanah Airku' with its Arabic line at the bottom" width="300"><br>
-      <sub><b>Indonesian page</b> · Rosé</sub>
+      <img src="docs/images/sunflower-phone-sepia.png" alt="Phone, Sepia theme: the Indonesian page of 'Ketika Kau Melihatku dengan yang Lain', the sunflower poem" width="300"><br>
+      <sub><b>Indonesian page</b> · Sepia</sub>
     </td>
     <td align="center">
       <img src="docs/images/arabic-phone-ocean.png" alt="Phone, Ocean theme: the Indonesian page of 'Jendela yang Selalu Kubiarkan Terbuka' with its Arabic line at the bottom" width="300"><br>
