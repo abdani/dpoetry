@@ -122,6 +122,6 @@ No build step and nothing to install: open `index.html` in a browser.
 
 | Component | Purpose | License |
 | --- | --- | --- |
-| HTML, CSS and JavaScript in one file | The whole site | — |
+| HTML (`index.html`), CSS (`style.css`) and plain JavaScript (`app.js`, poems in `poems.js`) | The whole site, no framework and no build step | — |
 | [Lora](https://fonts.google.com/specimen/Lora) and [Cormorant Garamond](https://fonts.google.com/specimen/Cormorant+Garamond) via Google Fonts | Reading text and headings | SIL OFL 1.1 |
 | [GitHub Pages](https://pages.github.com/) | Hosting | — |
