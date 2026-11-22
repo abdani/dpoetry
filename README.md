@@ -19,13 +19,28 @@
 > [!NOTE]
 > **Unreleased.** The poems are still being corrected and revised, so text, titles and translations may change before the first release.
 
-## English, Indonesian and a line of Arabic
+## Preview
+
+<p align="center">
+  <img src="docs/images/english-desktop.png" alt="Desktop, Midnight theme: the English page of 'The Moon I Borrowed from the Sky'" width="880"><br>
+  <sub><b>English page</b> · Midnight</sub>
+</p>
+
+<p align="center">
+  <img src="docs/images/feature-search.png" alt="Desktop, Wine theme: word search for 'longing' with five English results, highlighted snippets and an Enter hint for all results" width="880"><br>
+  <sub><b>Word search</b> · top 5 with highlighted snippets, <kbd>Enter</kbd> for all · Wine</sub>
+</p>
+
+### A line of Arabic
 
 Each poem opens with its English page; the Indonesian page follows and often closes with a single line of Arabic, its transliteration and meaning.
 
 <p align="center">
-  <img src="docs/images/arabic-desktop.png" alt="Desktop, Midnight theme: the Indonesian page of 'Bulan yang Kupinjam dari Langit', ending with an Arabic line, its transliteration and meaning" width="880">
+  <img src="docs/images/arabic-desktop.png" alt="Desktop, Midnight theme: the Indonesian page of 'Hujan yang Membawa Namamu', ending with an Arabic line, its transliteration and meaning" width="880"><br>
+  <sub><b>Indonesian page with Arabic</b> · Midnight</sub>
 </p>
+
+### On phones
 
 <table align="center">
   <tr>
@@ -71,21 +86,16 @@ Each poem opens with its English page; the Indonesian page follows and often clo
 
 <table>
   <tr>
-    <td align="center" width="50%">
-      <img src="docs/images/feature-search.png" alt="Word search for 'rindu': five results with highlighted snippets and an Enter hint for all results"><br>
-      <sub><b>Word search</b> · top 5 with highlighted snippets, <kbd>Enter</kbd> for all</sub>
-    </td>
-    <td align="center" width="50%">
+    <td align="center" width="65%">
       <img src="docs/images/feature-themes.png" alt="The theme menu open over the Sepia theme, showing all eight color themes"><br>
       <sub><b>Color themes</b> · shown here in Sepia</sub>
     </td>
+    <td align="center" width="35%">
+      <img src="docs/images/feature-timeline-phone.png" alt="Phone, Sage theme: the floating timeline opened over the poem"><br>
+      <sub><b>Floating timeline</b> on a phone · Sage</sub>
+    </td>
   </tr>
 </table>
-
-<p align="center">
-  <img src="docs/images/feature-timeline-phone.png" alt="Phone, Sage theme: the floating timeline opened over the poem" width="300"><br>
-  <sub><b>Floating timeline</b> on a phone · Sage theme</sub>
-</p>
 
 ## Run it locally
 
