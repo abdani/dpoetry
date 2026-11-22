@@ -26,9 +26,15 @@
 <h3 align="center">✨ Star Vessel ✨</h3>
 
 <p align="center">
-  <i>I hope it finds its way to her, and that one day she reads it too.</i><br>
-  <sub><i>Star Vessel</i> is inspired by Sukima Switch - 星のうつわ (Hoshi no Utsuwa)</sub>
+  <i>I hope it finds its way to her, and that one day she reads it too.</i>
 </p>
+
+<table align="center">
+  <tr>
+    <td><img src="docs/images/hoshi-no-utsuwa.jpg" alt="Cover of 星のうつわ (Hoshi no Utsuwa) by Sukima Switch: hands joined by a green thread" width="140"></td>
+    <td><i>Star Vessel</i> is inspired by<br><b>Sukima Switch</b> - 星のうつわ<br>(Hoshi no Utsuwa)</td>
+  </tr>
+</table>
 
 ## Preview
 
