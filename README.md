@@ -8,7 +8,6 @@
 
 <p align="center">
   <img alt="Status: Unreleased" src="https://img.shields.io/badge/Status-Unreleased-F59E0B?style=for-the-badge">
-  <img alt="Single HTML file" src="https://img.shields.io/badge/HTML-single%20file-E34F26?style=for-the-badge&logo=html5&logoColor=white">
   <img alt="Hosted on GitHub Pages" src="https://img.shields.io/badge/Hosted%20on-GitHub%20Pages-222222?style=for-the-badge&logo=github&logoColor=white">
 </p>
 
