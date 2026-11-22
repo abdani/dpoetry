@@ -1,5 +1,5 @@
 <h1 align="center">DPOETRY</h1>
-<h2 align="center">Unreleased</h2>
+<h3 align="center"><i>Unreleased</i></h3>
 
 <p align="center">
   An Archive of Quiet Things — Made of memory &amp; meaning.<br>
@@ -19,9 +19,25 @@
 > [!NOTE]
 > **Unreleased.** The poems are still being corrected and revised, so text, titles and translations may change before the first release.
 
+## Poems with Arabic
+
+Many poems close their Indonesian page with a single line of Arabic, followed by its transliteration and meaning.
+
+<p align="center">
+  <img src="docs/images/arabic-desktop.png" alt="Desktop, Midnight theme: the Indonesian page of 'Bulan yang Kupinjam dari Langit', ending with an Arabic line, its transliteration and meaning" width="880">
+</p>
+
+<p align="center">
+  <img src="docs/images/arabic-phone-rose.png" alt="Phone, Rosé theme: 'Kau adalah Tanah Airku' with its Arabic line at the bottom" width="300">
+  &nbsp;&nbsp;
+  <img src="docs/images/arabic-phone-ocean.png" alt="Phone, Ocean theme: 'Jendela yang Selalu Kubiarkan Terbuka' with its Arabic line at the bottom" width="300">
+</p>
+
 ## What's inside
 
-- **49 poems:** 15 titles in three versions each (an English page and an Indonesian page, many closing with a line of Arabic with its transliteration and meaning), the full *Star Vessel*, and three earlier poems.
+- Poems in Indonesian and English: the English page comes first, then the Indonesian page.
+- Several titles come in more than one version, each written with a different approach: a metaphor, an object, distance or a feeling.
+- *Star Vessel* in full, plus a few earlier poems.
 - Every poem has exactly **two pages**.
 
 ## Features
@@ -35,6 +51,24 @@
 | **Eight color themes** | Midnight, Ocean, Lavender, Wine, Daylight, Rosé, Sage and Sepia, all checked for readable contrast (WCAG). Your choice is remembered. |
 | **Smooth on phones** | Animations run on the GPU and were measured on an Android-like profile. Respects *reduce motion*. |
 | **Responsive** | From 320 px phones to wide desktops. |
+
+<table>
+  <tr>
+    <td align="center" width="50%">
+      <img src="docs/images/feature-search.png" alt="Word search for 'rindu': five results with highlighted snippets and an Enter hint for all results"><br>
+      <sub><b>Word search</b> · top 5 with highlighted snippets, <kbd>Enter</kbd> for all</sub>
+    </td>
+    <td align="center" width="50%">
+      <img src="docs/images/feature-themes.png" alt="The theme menu open over the Sepia theme, showing all eight color themes"><br>
+      <sub><b>Color themes</b> · shown here in Sepia</sub>
+    </td>
+  </tr>
+</table>
+
+<p align="center">
+  <img src="docs/images/feature-timeline-phone.png" alt="Phone, Sage theme: the floating timeline opened over the poem" width="300"><br>
+  <sub><b>Floating timeline</b> on a phone · Sage theme</sub>
+</p>
 
 ## Run it locally
 
