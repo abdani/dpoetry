@@ -19,6 +19,17 @@
 > [!NOTE]
 > **Unreleased.** The poems are still being corrected and revised, so text, titles and translations may change before the first release.
 
+<p align="center">
+  Among these poems, there is one I wrote especially for someone dear to me,<br>
+  from the deepest part of my heart:
+</p>
+
+<h3 align="center">✨ Star Vessel ✨</h3>
+
+<p align="center">
+  <i>I hope it finds its way to them, and that one day they read it too.</i>
+</p>
+
 ## Preview
 
 <p align="center">
