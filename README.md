@@ -26,7 +26,8 @@
 <h3 align="center">✨ Star Vessel ✨</h3>
 
 <p align="center">
-  <i>I hope it finds its way to her, and that one day she reads it too.</i>
+  <i>I hope it finds its way to her, and that one day she reads it too.</i><br>
+  <sub><i>Star Vessel</i> is inspired by Sukima Switch - 星のうつわ (Hoshi no Utsuwa)</sub>
 </p>
 
 ## Preview
@@ -118,5 +119,3 @@ No build step and nothing to install: open `index.html` in a browser.
 | HTML, CSS and JavaScript in one file | The whole site | — |
 | [Lora](https://fonts.google.com/specimen/Lora) and [Cormorant Garamond](https://fonts.google.com/specimen/Cormorant+Garamond) via Google Fonts | Reading text and headings | SIL OFL 1.1 |
 | [GitHub Pages](https://pages.github.com/) | Hosting | — |
-
-*Star Vessel* is inspired by 星のうつわ (Hoshi no Utsuwa) by Sukima Switch.
