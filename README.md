@@ -1,5 +1,5 @@
 <h1 align="center">DPOETRY</h1>
-<h2>Unreleased</h2>
+<h2 align="center">Unreleased</h2>
 
 <p align="center">
   An Archive of Quiet Things — Made of memory &amp; meaning.<br>
